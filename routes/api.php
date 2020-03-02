@@ -18,5 +18,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //Route::resource('')
+Route::get('test', function (){
+    return response()->json(123);
+});
+
 Route::resource('posts', 'PostsController');
 
+Route::post('signup', 'AuthController@register');
+Route::post('login', 'AuthController@login');
+
+Route::group(['middleware' => 'jwt.auth'], function ()
+{
+    Route::get('auth', 'AuthController@user');
+    Route::post('logout', 'AuthController@logout');
+});
+
+Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refresh');
