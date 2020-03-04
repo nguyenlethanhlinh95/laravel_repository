@@ -23,3 +23,6 @@ Route::group(['prefix' => 'admin'],
 
 Route::get('/index', 'HomeController@index')->name('home.index');
 
+
+Route::get('/web', 'AjaxController@web');
+Route::post('ajaxRequest', 'AjaxController@ajaxRequestPost')->name('ajaxRequestPost');
